@@ -59,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
 //   });
 // });
 
+var keywords = {};
+
 chrome.webRequest.onBeforeRequest.addListener(function(details) {
   if(details.method === 'GET') {
     var url = details.url;
@@ -69,6 +71,11 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
         var keyword = keywordGroup[1];
         if(keyword) {
           var realKeyword = decodeURIComponent(keyword.replace(/\+/g, ' '));
+          if(keywords[realKeyword]) {
+            keywords[realKeyword] += 1;
+          } else {
+            keywords[realKeyword] = 1;
+          }
           console.log(realKeyword);
         }
       }
