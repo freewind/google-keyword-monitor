@@ -2,21 +2,21 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+var console = chrome.extension.getBackgroundPage().console;
+
 /**
  * Get the current URL.
  *
  * @param {function(string)} callback - called when the URL of the current tab
  *   is found.
- */
+ */ 
  function getCurrentTabUrl(callback) {
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
-  var queryInfo = {
-    active: true,
-    currentWindow: true
-  };
 
-  chrome.tabs.query(queryInfo, function(tabs) {
+  alert('getCurrentTabUrl');
+
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     // chrome.tabs.query invokes the callback with a list of tabs that match the
     // query. When the popup is opened, there is certainly a window and at least
     // one tab, so we can safely assume that |tabs| is a non-empty array.
@@ -48,14 +48,32 @@
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  getCurrentTabUrl(function(url) {
-    alert("current url is: " + url);
-  });
+  // getCurrentTabUrl(function(url) {
+  //   alert("current url is: " + url);
+  // });
 });
 
-chrome.tabs.onActivated.addListener(function() {
-  alert("tab changed");
-   getCurrentTabUrl(function(url) {
-    alert("current url is: " + url);
-  });
-});
+// chrome.tabs.onActivated.addListener(function() {
+//   getCurrentTabUrl(function(url) {
+//     alert("current url is: " + url);
+//   });
+// });
+
+chrome.webRequest.onBeforeRequest.addListener(function(details) {
+  if(details.method === 'GET') {
+    var url = details.url;
+    if(/.*\.google\.[^\/]+\/search\?.*/.test(url)) {
+      console.log(url);
+      var keywordGroup = url.match(/.*\bq=(.+?)(\&.*|$)/)
+      if(keywordGroup) {
+        var keyword = keywordGroup[1];
+        if(keyword) {
+          var realKeyword = decodeURIComponent(keyword.replace(/\+/g, ' '));
+          console.log(realKeyword);
+        }
+      }
+    }
+  }
+
+  // console.log(details.url);
+}, {urls: ["<all_urls>"]}, []);

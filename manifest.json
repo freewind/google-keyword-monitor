@@ -6,11 +6,18 @@
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_icon": "icon.png"
   },
+
+  "background": {
+    "scripts": ["lodash.min.js", "background.js"],
+    "persistent": true
+  },
+
   "permissions": [
     "activeTab",
+    "tabs",
+    "webRequest",
     "<all_urls>"
   ]
 }
