@@ -1,0 +1,1 @@
+A simple chrome extension to show current url
