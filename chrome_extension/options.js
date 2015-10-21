@@ -10,8 +10,10 @@ $("#save").click(function() {
 	var myName = $("#my-name").val();
 	var serverUrl = $("#server-url").val();
 	if(myName && serverUrl) {
-		bgPage.myName = myName;
-		bgPage.serverUrl = serverUrl;
+		bgPage.saveOptions({
+			myName : myName,
+			serverUrl : serverUrl
+		});
 		alert("OK");
 	} else {
 		alert("'myName' or 'serverUrl' can't be empty");

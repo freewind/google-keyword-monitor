@@ -23,8 +23,7 @@
   "options_page": "chrome_extension/options.html",
 
   "permissions": [
-    "activeTab",
-    "tabs",
+    "storage",
     "webRequest",
     "<all_urls>"
   ]
