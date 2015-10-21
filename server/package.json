@@ -1,0 +1,21 @@
+{
+  "name": "google-keyword-monitor-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.13.3"
+  },
+  "dependencies": {
+    "alasql": "^0.2.1",
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6"
+  }
+}
