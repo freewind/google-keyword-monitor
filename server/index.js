@@ -14,10 +14,10 @@ app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var keywords = sampleData;
+var keywords = [];
 
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/views/index.html');
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 app.get('/view/user-keyword', function(req, res) {
