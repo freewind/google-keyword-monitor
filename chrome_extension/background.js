@@ -83,7 +83,7 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
             keyword : realKeyword,
             timestamp : moment().unix()
           }).error( function(xhr, textStatus, errorThrown) {
-            alert(xhr.responseText);
+            alert("Can't post data to: " + serverUrl+ ", " + xhr.responseText);
           });
         }
       }

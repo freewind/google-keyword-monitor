@@ -7,6 +7,8 @@ var sampleData = require('./sample-data');
 
 var app = express();
 
+// logger
+app.use(require('morgan')('dev'));
 
 // for parsing application/json
 app.use(bodyParser.json());
