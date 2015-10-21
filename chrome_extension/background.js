@@ -14,8 +14,6 @@ var console = chrome.extension.getBackgroundPage().console;
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
 
-  alert('getCurrentTabUrl');
-
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     // chrome.tabs.query invokes the callback with a list of tabs that match the
     // query. When the popup is opened, there is certainly a window and at least
@@ -59,6 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
 //   });
 // });
 
+var myName = "";
+var serverUrl = "";
 var keywords = {};
 
 chrome.webRequest.onBeforeRequest.addListener(function(details) {
@@ -77,6 +77,14 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
             keywords[realKeyword] = 1;
           }
           console.log(realKeyword);
+          $.post(serverUrl, {
+            who: myName,
+            searchEngine : "google",
+            keyword : realKeyword,
+            timestamp : moment().unix()
+          }).error( function(xhr, textStatus, errorThrown) {
+            alert(xhr.responseText);
+          });
         }
       }
     }

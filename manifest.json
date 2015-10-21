@@ -11,9 +11,16 @@
   },
 
   "background": {
-    "scripts": ["chrome_extension/lodash.min.js", "chrome_extension/background.js"],
+    "scripts": [
+      "chrome_extension/lodash.min.js", 
+      "chrome_extension/jquery-1.9.1.js", 
+      "chrome_extension/moment.js", 
+      "chrome_extension/background.js"
+    ],
     "persistent": true
   },
+
+  "options_page": "chrome_extension/options.html",
 
   "permissions": [
     "activeTab",
